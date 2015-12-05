@@ -1,22 +1,19 @@
 #include <stdio.h>
 #include <malloc.h>
-#include <stdlib.h>
 int main() {
-	struct node
-	{
-		int num;
+	struct node {
+		int data;
 		struct node *ptr;
 	};
 	typedef struct node NODE;
-	NODE *head, *first, *temp = 0;
+	NODE *head, *first = 0, *temp = 0;
 	int count = 0;
 	int choice = 1;
-	first = 0;
 	while (choice)
 	{
 		head = (NODE *)malloc(sizeof(NODE));
 		printf("Enter element\n");
-		scanf("%d", &head -> num);
+		scanf("%d", &head -> data);
 		count++;
 		if (first != 0)	{
 			temp -> ptr = head;
@@ -30,28 +27,28 @@ int main() {
 		scanf("%d", &choice);
 	}
 	int count1 = 0;
-	temp -> ptr = 0;
+	temp -> ptr = NULL;
 	temp = first;
 	if (count % 2 != 0) {
 		count /= 2;
-		while (temp != 0) {
+		while (temp != NULL) {
 			if (count == count1) {
-				printf("Median is %d\n", temp -> num);
+				printf("Median is %d\n", temp -> data);
 				break;
 			}
-			count1++;
-			temp = temp -> ptr;
+			count1 += 2;
+			temp = temp -> ptr -> ptr;
 		}
 	}
 	else {
 		count /= 2;
-		while (temp != 0) {
+		while (temp != NULL) {
 			if (count == count1) {
-				printf("Median of %d %d is %d \n", temp -> num, temp -> ptr -> num, ((temp -> num) + (temp -> ptr -> num)) / 2);
+				printf("Median is %d \n", temp -> data, temp -> ptr -> data, ((temp -> data) + (temp -> ptr -> data)) / 2);
 				break;
 			}
-			count1++;
-			temp = temp -> ptr;
+			count1 += 2;
+			temp = temp -> ptr -> ptr;
 		}
 	}
 	_getch();
